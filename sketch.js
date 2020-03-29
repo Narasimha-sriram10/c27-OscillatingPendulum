@@ -8,91 +8,54 @@ var engine, world;
 var holder,ball,ground;
 
 function setup() {
-  createCanvas(400,400);
+  createCanvas(800,400);
   engine = Engine.create();
   world = engine.world;
 
-  var ground_options={
-    isStatic : true
-  }
-
-
-  var holder_options={
-    isStatic: true
-  }
-
-  ground = Bodies.rectangle(200,330,400,20,ground_options)
-  World.add(world,ground);
-
-holder = Bodies.rectangle(200,100,200,20,holder_options);
-World.add(world,holder);
-
-var ball_options = {
-
-  restitution : 1.0,
-  density : 1.0
-
-}
-
-ball  = Bodies.circle(220,200,40,ball_options);
-World.add(world,ball);
-
-
-var options = {
-  bodyA : ball,
-  bodyB : holder,
-  stiffness: 0.004,
-  length : 100
-}
-var string = Constraint.create(options);
-World.add(world,string);
-
-fill("WHite");
+  ground = new Ground();  
+  holder = new Holder();
+  ball = new Ball(200,300,30);
+  ball2 = new Ball(400,300,30);
+  ball3 = new Ball(600,300,30);
+  connector = new Connector({x:200,y:100},ball.body);
+  connector2 = new Connector({x:400,y:100},ball2.body);
+  connector3 = new Connector({x:600,y:100},ball3.body);
 }
 
 
 function draw() {
-  background(0); 
+  background("lavender"); 
   Engine.update(engine);
 
+  textSize(17);
+  fill("black")
+  text("Drag mouse to oscillate the pendulum to left and right with mouse",150,30);
+  text("Press Enter to reset the Pendulum to start oscillating",215,60);
 
-  text("Press space bar to oscillate the pendulam to left and right with mouse",10,20);
-  text("Press Enter to stop the Pendulum from oscillating",100,50);
+  ground.display();
+  holder.display();
+  ball.display();
+  ball2.display();
+  ball3.display();
+  connector.display();
+  connector2.display();
+  connector3.display();
 
-  fill ("brown");
-rectMode(CENTER);
-rect(holder.position.x,holder.position.y,200,20);
-
-fill(0);
-rectMode(CENTER);
-rect(ground.position.x,ground.position.y,400,20);
-
-
-fill("blue");
-ellipseMode(RADIUS);
-ellipse(ball.position.x,ball.position.y,40);
-
-strokeWeight(8);
-stroke("white");
-line(ball.position.x,ball.position.y,holder.position.x,holder.position.y)
-
-
-
-
-if(keyCode===32){
-ball.position.y = mouseY;
-ball.position.x = mouseX;
+  
 }
 
-else if (keyCode === ENTER){
-ball.position.x = 200;
-
+function mouseDragged(){
+  Matter.Body.setPosition(ball.body, {x: mouseX , y: mouseY});
+  Matter.Body.setPosition(ball2.body, {x: mouseX +200, y: mouseY});
+  Matter.Body.setPosition(ball3.body, {x: mouseX+400 , y: mouseY});
 }
-
+function keyPressed(){
+if(keyCode=ENTER){
+  Matter.Body.setPosition(ball.body, {x: 200 , y: 200});
+  Matter.Body.setPosition(ball2.body, {x: 400 ,y: 200});
+  Matter.Body.setPosition(ball3.body, {x: 600 ,y: 200});
 }
-
-
-
+}
 
 
 

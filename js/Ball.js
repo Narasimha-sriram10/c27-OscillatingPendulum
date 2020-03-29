@@ -1,13 +1,21 @@
 class Ball{
     constructor(x,y,radius){
 
-        var options = {
-            bodyA : ball,
-            bodyB : holder,
-            stiffness: 0.004,
-            length : 100
+        var ball_options={
+            'restitution':0.8,
+            'friction':1.0,
+            'density':1.0
           }
-        this.body  = Bodies.circle(220,200,40,ball_options);
-World.add(world,this.body);
+        this.body  = Bodies.circle(x,y,radius,ball_options);
+        this.radius=radius;
+        World.add(world,this.body);
     }
+    display(){
+        fill("lightblue");
+        ellipseMode(RADIUS);
+        ellipse(this.body.position.x,this.body.position.y,this.radius);
+        
+    }
+    
+    
 }
