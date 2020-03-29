@@ -9,6 +9,7 @@ class Ground{
           World.add(world,this.ground);
     }
     display(){
+        noStroke();
         fill(188,67,67);
         rectMode(CENTER);
         rect(this.ground.position.x,this.ground.position.y,800,20);

@@ -8,7 +8,8 @@ class Holder{
         World.add(world,this.holder);
     }
     display(){
-        fill (188,98,98);
+        noStroke();
+        fill ("lightpink");
         rectMode(CENTER);
         rect(this.holder.position.x,this.holder.position.y,600,10);
         

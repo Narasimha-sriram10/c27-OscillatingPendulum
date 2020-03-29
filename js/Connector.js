@@ -15,8 +15,8 @@ class Connector{
         var pointA = this.pointA;
         var pointB = this.string.bodyB.position;
         push();
-        strokeWeight(8);
-        stroke("black");
+        strokeWeight(6);
+        stroke("skyblue");
         line(pointA.x,pointA.y,pointB.x,pointB.y);
         pop();
     }

@@ -24,13 +24,13 @@ function setup() {
 
 
 function draw() {
-  background("lavender"); 
+  background("black"); 
   Engine.update(engine);
 
   textSize(17);
-  fill("black")
+  fill("lightyellow")
   text("Drag mouse to oscillate the pendulum to left and right with mouse",150,30);
-  text("Press Enter to reset the Pendulum to start oscillating",215,60);
+  text("Press Enter to stop the Pendulum from oscillating",215,60);
 
   ground.display();
   holder.display();
@@ -48,15 +48,22 @@ function mouseDragged(){
   Matter.Body.setPosition(ball.body, {x: mouseX , y: mouseY});
   Matter.Body.setPosition(ball2.body, {x: mouseX +200, y: mouseY});
   Matter.Body.setPosition(ball3.body, {x: mouseX+400 , y: mouseY});
+  Matter.Body.setStatic(ball.body, false);
+  Matter.Body.setStatic(ball2.body, false);
+  Matter.Body.setStatic(ball3.body, false);
 }
 function keyPressed(){
 if(keyCode=ENTER){
-  Matter.Body.setPosition(ball.body, {x: 200 , y: 200});
-  Matter.Body.setPosition(ball2.body, {x: 400 ,y: 200});
-  Matter.Body.setPosition(ball3.body, {x: 600 ,y: 200});
+  Matter.Body.setStatic(ball.body, true);
+  Matter.Body.setStatic(ball2.body, true);
+  Matter.Body.setStatic(ball3.body, true);
+  
 }
 }
 
+
+
+   
 
 
 

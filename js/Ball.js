@@ -11,6 +11,7 @@ class Ball{
         World.add(world,this.body);
     }
     display(){
+        noStroke();
         fill("lightblue");
         ellipseMode(RADIUS);
         ellipse(this.body.position.x,this.body.position.y,this.radius);
